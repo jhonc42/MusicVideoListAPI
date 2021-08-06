@@ -5,16 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Validator\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JAC.MusicVideoList.Domain.Core\JAC.MusicVideoList.Domain.Core.csproj" />
+    <ProjectReference Include="..\JAC.MusicVideoList.Application.Main\JAC.MusicVideoList.Application.Main.csproj" />
   </ItemGroup>
 
 </Project>

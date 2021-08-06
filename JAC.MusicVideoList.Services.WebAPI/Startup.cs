@@ -1,3 +1,5 @@
+using JAC.MusicVideoList.Domain.Core.Entities;
+using JAC.MusicVideoList.Infrastructure.Main;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +28,9 @@ namespace JAC.MusicVideoList.Services.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddMapper();
+            services.Configure<PasswordOptions>(options => Configuration.GetSection("PasswordOptions").Bind(options));
+            services.AddServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

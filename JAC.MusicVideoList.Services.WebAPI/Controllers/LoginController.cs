@@ -1,4 +1,7 @@
 ﻿using JAC.MusicVideoList.Application.Main.DTOs;
+using JAC.MusicVideoList.Application.Main.Interfaces;
+using JAC.MusicVideoList.Domain.Core.Entities;
+using JAC.MusicVideoList.Infrastructure.Main.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -6,23 +9,47 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Services.WebAPI.Controllers
 {
-    public class SecurityController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly IPasswordService _passwordService;
+        private readonly ILoginApplication _loginApplication;
 
-        public SecurityController(IConfiguration configuration)
+        public LoginController(IConfiguration configuration, IPasswordService passwordService, ILoginApplication loginApplication)
         {
             _configuration = configuration;
-        }
-        public IActionResult Index()
-        {
-            return View();
+            _passwordService = passwordService;
+            _loginApplication = loginApplication;
         }
 
-        private string GenerateToken(UserSecurityDTO user)
+        [HttpPost]
+        public async Task<IActionResult> Authentication(UserLogin login)
+        {
+            //if it is a valid user
+            var validation = await IsValidUser(login);
+            if (validation.Item1)
+            {
+                var token = GenerateToken(validation.Item2);
+                return Ok(new { token });
+            }
+
+            return NotFound();
+        }
+
+        private async Task<(bool, SecurityUserDTO)> IsValidUser(UserLogin login)
+        {
+            var user = await _loginApplication.GetLoginByCredentials(login);
+            var isValid = _passwordService.Check(user.Password, login.Password);
+            return (isValid, user);
+        }
+
+        private string GenerateToken(SecurityUserDTO user)
         {
             //Header
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]));

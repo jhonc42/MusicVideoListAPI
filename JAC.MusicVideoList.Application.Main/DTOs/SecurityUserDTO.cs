@@ -1,8 +1,9 @@
-﻿using JAC.MusicVideoList.Application.Main.Enums;
+﻿using JAC.MusicVideoList.Domain.Core.Enums;
 
 namespace JAC.MusicVideoList.Application.Main.DTOs
 {
-    public class UserSecurityDTO
+    public class SecurityUserDTO
+
     {
         public string User { get; set; }
 
