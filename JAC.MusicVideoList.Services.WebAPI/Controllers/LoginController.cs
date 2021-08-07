@@ -1,7 +1,6 @@
 ﻿using JAC.MusicVideoList.Application.Main.DTOs;
 using JAC.MusicVideoList.Application.Main.Interfaces;
 using JAC.MusicVideoList.Domain.Core.Entities;
-using JAC.MusicVideoList.Infrastructure.Main.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -18,13 +17,11 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IPasswordService _passwordService;
         private readonly ILoginApplication _loginApplication;
 
-        public LoginController(IConfiguration configuration, IPasswordService passwordService, ILoginApplication loginApplication)
+        public LoginController(IConfiguration configuration, ILoginApplication loginApplication)
         {
             _configuration = configuration;
-            _passwordService = passwordService;
             _loginApplication = loginApplication;
         }
 
@@ -42,12 +39,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
             return NotFound();
         }
 
-        private async Task<(bool, SecurityUserDTO)> IsValidUser(UserLogin login)
-        {
-            var user = await _loginApplication.GetLoginByCredentials(login);
-            var isValid = _passwordService.Check(user.Password, login.Password);
-            return (isValid, user);
-        }
+        private async Task<(bool, SecurityUserDTO)> IsValidUser(UserLogin login) => await _loginApplication.GetLoginByCredentials(login);
 
         private string GenerateToken(SecurityUserDTO user)
         {

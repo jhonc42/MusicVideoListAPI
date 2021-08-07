@@ -26,9 +26,10 @@ namespace JAC.MusicVideoList.Infrastructure.Main
         //}
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddSingleton<IPasswordService, PasswordService>();
-            services.AddSingleton<ILoginDomain, LoginDomain>();
+            services.AddTransient<IPasswordService, PasswordService>();
+            services.AddScoped<ILoginDomain, LoginDomain>();
             services.AddScoped<ILoginApplication, LoginApplication>();
+            services.AddTransient<ISecurityService, SecurityService>();
 
             return services;
         }

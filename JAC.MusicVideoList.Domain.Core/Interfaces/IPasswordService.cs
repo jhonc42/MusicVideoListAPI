@@ -1,4 +1,4 @@
-﻿namespace JAC.MusicVideoList.Infrastructure.Main.Services
+﻿namespace JAC.MusicVideoList.Domain.Core.Interfaces
 {
     public interface IPasswordService
     {

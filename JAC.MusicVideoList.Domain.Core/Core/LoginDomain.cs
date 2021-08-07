@@ -12,8 +12,15 @@ namespace JAC.MusicVideoList.Domain.Core.Core
     {
         public async Task<SecurityUser> GetLoginByCredentials(UserLogin userLogin)
         {
-            
-            return new SecurityUser { UserName = "Alex", Password = "123456", Role = Enums.RoleType.Administrator, User = "Alex123" };
+            var users = new List<SecurityUser> {
+                new SecurityUser { 
+                    UserName = "jhon123", 
+                    Password = "10000.nOiuuiDjRisPjakggdgsaQ==.gPsty6/HcMi2GSuj/VZdJly0lX1QsD+zl+ovaqM6AVo=", 
+                    Role = Enums.RoleType.Administrator, 
+                    User = "jhon" 
+                }
+            };
+            return users.FirstOrDefault(x => x.User == userLogin.User);
             // return await _unitOfWork.SecurityRepository.GetLoginByCredentials(userLogin);
         }
     }

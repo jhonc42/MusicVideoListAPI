@@ -6,6 +6,6 @@ namespace JAC.MusicVideoList.Application.Main.Interfaces
 {
     public interface ILoginApplication
     {
-        Task<SecurityUserDTO> GetLoginByCredentials(UserLogin userLogin);
+        Task<(bool, SecurityUserDTO)> GetLoginByCredentials(UserLogin userLogin);
     }
 }
