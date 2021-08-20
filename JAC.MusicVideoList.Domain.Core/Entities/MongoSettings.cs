@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Domain.Core.Entities
 {
-    public class UserLogin
+    public class MongoSettings
     {
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
+        public string ConnectionString { get; set; }
+        public string DataBase { get; set; }
     }
 }

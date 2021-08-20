@@ -4,6 +4,8 @@ using JAC.MusicVideoList.Application.Main.Main;
 using JAC.MusicVideoList.Domain.Core.Core;
 using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
+using JAC.MusicVideoList.Infrastructure.Main.Data.ContextMongoDB;
+using JAC.MusicVideoList.Infrastructure.Main.Repositories;
 using JAC.MusicVideoList.Infrastructure.Main.Services;
 using JAC.MusicVideoList.Transversal.Common.Mapper;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +32,10 @@ namespace JAC.MusicVideoList.Infrastructure.Main
             services.AddScoped<ILoginDomain, LoginDomain>();
             services.AddScoped<ILoginApplication, LoginApplication>();
             services.AddTransient<ISecurityService, SecurityService>();
+
+            services.AddTransient<IUserContext, UserContext>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
 
             return services;
         }

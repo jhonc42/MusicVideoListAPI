@@ -10,10 +10,16 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Services
 {
     public class SecurityService : ISecurityService
     {
+        private readonly IUserRepository _userRepository;
+
+        public SecurityService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
         public async Task RegisterSecurityUser(SecurityUser securityUser)
         {
-            var user = securityUser;
-            // TODO implement UnitOfWork and DB connection, what DB are you gonna use?
+            await _userRepository.RegisterUser(securityUser);
+
         }
     }
 }

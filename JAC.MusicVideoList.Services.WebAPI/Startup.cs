@@ -28,8 +28,15 @@ namespace JAC.MusicVideoList.Services.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMapper();
+            services.Configure<MongoSettings>(options => 
+            {
+                options.ConnectionString = Configuration.GetSection("MongoDB:ConnectionString").Value;
+                options.DataBase = Configuration.GetSection("MongoDB:DataBase").Value;
+            });
+            services.AddSingleton<MongoSettings>();
             services.Configure<PasswordOptions>(options => Configuration.GetSection("PasswordOptions").Bind(options));
+            services.AddMapper();
+            
             services.AddServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>
