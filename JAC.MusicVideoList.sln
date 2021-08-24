@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JAC.MusicVideoList.Domain.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JAC.MusicVideoList.Application.Main", "JAC.MusicVideoList.Application.Main\JAC.MusicVideoList.Application.Main.csproj", "{C7E427F9-DDD2-4BF2-AA98-C1A4264B4A1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JAC.MusicVideoList.Infrastructure.Main", "JAC.MusicVideoList.Infrastructure.Main\JAC.MusicVideoList.Infrastructure.Main.csproj", "{41308279-61D8-43AD-A62D-4A89C62BCE11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JAC.MusicVideoList.Infrastructure.Main", "JAC.MusicVideoList.Infrastructure.Main\JAC.MusicVideoList.Infrastructure.Main.csproj", "{41308279-61D8-43AD-A62D-4A89C62BCE11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JAC.MusicVideoList.Transversal.Common", "JAC.MusicVideoList.Transversal.Common\JAC.MusicVideoList.Transversal.Common.csproj", "{4534816F-1EE8-463F-B239-BC1F0F324EF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JAC.MusicVideoList.Transversal.Common", "JAC.MusicVideoList.Transversal.Common\JAC.MusicVideoList.Transversal.Common.csproj", "{4534816F-1EE8-463F-B239-BC1F0F324EF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JAC.MusicVideoList.Application.Test", "JAC.MusicVideoList.Application.Test\JAC.MusicVideoList.Application.Test.csproj", "{C2BC9F23-F859-401E-B0D1-FB01CDDCBEB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{4534816F-1EE8-463F-B239-BC1F0F324EF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4534816F-1EE8-463F-B239-BC1F0F324EF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4534816F-1EE8-463F-B239-BC1F0F324EF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2BC9F23-F859-401E-B0D1-FB01CDDCBEB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BC9F23-F859-401E-B0D1-FB01CDDCBEB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BC9F23-F859-401E-B0D1-FB01CDDCBEB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BC9F23-F859-401E-B0D1-FB01CDDCBEB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{C7E427F9-DDD2-4BF2-AA98-C1A4264B4A1C} = {5758D8B5-7465-495D-A37C-DD9E50E7EB1E}
 		{41308279-61D8-43AD-A62D-4A89C62BCE11} = {493487C1-DF70-4EC0-8C54-48FEDAEFDD16}
 		{4534816F-1EE8-463F-B239-BC1F0F324EF0} = {76CA8E6F-048C-4180-9452-A845852EF9AA}
+		{C2BC9F23-F859-401E-B0D1-FB01CDDCBEB6} = {0ABECE7D-6671-4DAB-971F-D100B09A677A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81F5399E-1008-4773-B071-ED42926E8B9B}
