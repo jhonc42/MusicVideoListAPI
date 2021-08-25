@@ -39,9 +39,9 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
             return NotFound();
         }
 
-        private async Task<(bool, SecurityUserDTO)> IsValidUser(UserLogin login) => await _loginApplication.GetLoginByCredentials(login);
+        private async Task<(bool, UserDTO)> IsValidUser(UserLogin login) => await _loginApplication.GetLoginByCredentials(login);
 
-        private string GenerateToken(SecurityUserDTO user)
+        private string GenerateToken(UserDTO user)
         {
             //Header
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]));
@@ -52,7 +52,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim("User", user.User),
+                new Claim("User", user.Name),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
             };
 

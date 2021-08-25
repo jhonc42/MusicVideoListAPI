@@ -22,9 +22,9 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(SecurityUserDTO securityUserDTO)
+        public async Task<IActionResult> Post(UserDTO securityUserDTO)
         {
-            var securityUser = _mapper.Map<SecurityUser>(securityUserDTO);
+            var securityUser = _mapper.Map<User>(securityUserDTO);
 
             securityUser.Password = _passwordService.Hash(securityUser.Password);
             await _securityService.RegisterSecurityUser(securityUser);

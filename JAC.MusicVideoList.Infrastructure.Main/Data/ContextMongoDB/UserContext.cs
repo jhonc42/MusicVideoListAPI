@@ -17,6 +17,6 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Data.ContextMongoDB
             var client = new MongoClient(options.Value.ConnectionString);
             _db = client.GetDatabase(options.Value.DataBase);
         }
-        public IMongoCollection<SecurityUser> Users => _db.GetCollection<SecurityUser>("SecurityUser");
+        public IMongoCollection<User> Users => _db.GetCollection<User>("User");
     }
 }

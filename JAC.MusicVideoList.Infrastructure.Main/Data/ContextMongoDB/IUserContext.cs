@@ -10,6 +10,6 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Data.ContextMongoDB
 {
     public interface IUserContext
     {
-        IMongoCollection<SecurityUser> Users {get;}
+        IMongoCollection<User> Users {get;}
     }
 }

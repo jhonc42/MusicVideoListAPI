@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JAC.MusicVideoList.Domain.Core.Enums;
 
 namespace JAC.MusicVideoList.Application.Main.DTOs
 {
-    class UserDTO
+    public class UserDTO
+
     {
+        public string Name { get; set; }
+
+        public string UserName { get; set; }
+        public string Password { get; set; }
+
+        public RoleType? Role { get; set; }
     }
 }

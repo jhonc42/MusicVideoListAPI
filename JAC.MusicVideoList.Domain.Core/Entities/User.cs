@@ -1,4 +1,5 @@
-﻿using JAC.MusicVideoList.Domain.Core.Enums;
+﻿using JAC.MusicVideoList.Domain.Core.Entities.Repository;
+using JAC.MusicVideoList.Domain.Core.Enums;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
@@ -9,13 +10,15 @@ using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Domain.Core.Entities
 {
-    public class SecurityUser
+    [BsonCollection("User")]
+    public class User : Document
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        //[BsonId]
+        //[BsonRepresentation(BsonType.ObjectId)]
+        //public string Id { get; set; }
+
         // [BsonElement("User")]
-        public string User { get; set; }
+        public string Name { get; set; }
 
         public string UserName { get; set; }
 

@@ -8,7 +8,7 @@ namespace JAC.MusicVideoList.Transversal.Common.Mapper
     {
         public AutomapperProfile()
         {
-            CreateMap<SecurityUserDTO, SecurityUser>().ReverseMap();
+            CreateMap<UserDTO, User>().ReverseMap();
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
+using JAC.MusicVideoList.Domain.Core.Interfaces.Repository;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +12,19 @@ namespace JAC.MusicVideoList.Domain.Core.Core
 {
     public class LoginDomain : ILoginDomain
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IMongoRepository<User> _userRepository;
 
-        public LoginDomain(IUserRepository userRepository)
+        public LoginDomain(IMongoRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }
-        public async Task<SecurityUser> GetLoginByCredentials(UserLogin userLogin)
+        public async Task<User> GetLoginByCredentials(UserLogin userLogin)
         {
-            //var users = new List<SecurityUser> {
-            //    new SecurityUser { 
-            //        UserName = "jhon123", 
-            //        Password = "10000.nOiuuiDjRisPjakggdgsaQ==.gPsty6/HcMi2GSuj/VZdJly0lX1QsD+zl+ovaqM6AVo=", 
-            //        Role = Enums.RoleType.Administrator, 
-            //        User = "jhon" 
-            //    }
-            //};
-
-            return await _userRepository.GetUserByUserName(userLogin);
+            return await _userRepository.FindOneAsync(
+                filter => filter.UserName == userLogin.UserName
+                // x => x.UserName == userLogin.UserName
+            );
+            // return await _userRepository.GetUserByUserName(userLogin);
             // return await _unitOfWork.SecurityRepository.GetLoginByCredentials(userLogin);
         }
     }

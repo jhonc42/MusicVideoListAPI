@@ -5,6 +5,6 @@ namespace JAC.MusicVideoList.Domain.Core.Interfaces
 {
     public interface ISecurityService
     {
-        Task RegisterSecurityUser(SecurityUser securityUser);
+        Task RegisterSecurityUser(User securityUser);
     }
 }

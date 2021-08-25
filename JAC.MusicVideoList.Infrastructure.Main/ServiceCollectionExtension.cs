@@ -4,6 +4,7 @@ using JAC.MusicVideoList.Application.Main.Main;
 using JAC.MusicVideoList.Domain.Core.Core;
 using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
+using JAC.MusicVideoList.Domain.Core.Interfaces.Repository;
 using JAC.MusicVideoList.Infrastructure.Main.Data.ContextMongoDB;
 using JAC.MusicVideoList.Infrastructure.Main.Repositories;
 using JAC.MusicVideoList.Infrastructure.Main.Services;
@@ -36,6 +37,8 @@ namespace JAC.MusicVideoList.Infrastructure.Main
             services.AddTransient<IUserContext, UserContext>();
 
             services.AddTransient<IUserRepository, UserRepository>();
+
+            
 
             return services;
         }

@@ -1,6 +1,7 @@
 ﻿using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
 using JAC.MusicVideoList.Infrastructure.Main.Data.ContextMongoDB;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Infrastructure.Main.Repositories
 {
+    //class UserRepository : MongoRepository<User>, IUserRepository
     class UserRepository : IUserRepository
     {
         private readonly IUserContext _userContext;
@@ -18,17 +20,12 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Repositories
             _userContext = userContext;
         }
 
-        public async Task<SecurityUser> GetUserByUserName(UserLogin user)
+        public async Task<User> GetUserByUserName(UserLogin user)
         {
             return await _userContext.Users.Find(x => x.UserName == user.UserName).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<SecurityUser>> GetUsers()
-        {
-            return await _userContext.Users.Find(x => true).ToListAsync();
-        }
-
-        public async Task RegisterUser(SecurityUser newUser)
+        public async Task RegisterUser(User newUser)
         {
             await _userContext.Users.InsertOneAsync(newUser);
         }

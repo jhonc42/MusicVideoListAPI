@@ -22,15 +22,15 @@ namespace JAC.MusicVideoList.Application.Main.Main
             _mapper = mapper;
             _passwordService = passwordService;
         }
-        public async Task<(bool, SecurityUserDTO)> GetLoginByCredentials(UserLogin userLogin)
+        public async Task<(bool, UserDTO)> GetLoginByCredentials(UserLogin userLogin)
         {
             // TODO exceptions manage
             var user = await _loginDomain.GetLoginByCredentials(userLogin);
             if (user == null)
-                return (false, _mapper.Map<SecurityUserDTO>(user));
+                return (false, _mapper.Map<UserDTO>(user));
 
             var isValid = _passwordService.Check(user.Password, userLogin.Password);
-            return (isValid, _mapper.Map<SecurityUserDTO>(user));
+            return (isValid, _mapper.Map<UserDTO>(user));
         }
     }
 }

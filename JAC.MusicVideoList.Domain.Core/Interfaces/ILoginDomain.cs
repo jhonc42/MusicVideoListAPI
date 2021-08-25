@@ -9,6 +9,6 @@ namespace JAC.MusicVideoList.Domain.Core.Interfaces
 {
     public interface ILoginDomain
     {
-        Task<SecurityUser> GetLoginByCredentials(UserLogin userLogin);
+        Task<User> GetLoginByCredentials(UserLogin userLogin);
     }
 }
