@@ -7,21 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JAC.MusicVideoList.Infrastructure.Main.Services
+namespace JAC.MusicVideoList.Domain.Core.Core
 {
-    public class SecurityService : ISecurityService
+    public class UserDomain : IUserDomain
     {
-        // private readonly IUserRepository _userRepository;
         private readonly IRepository<User> _userRepository;
-        // private readonly IUnitOfWork _uow;
 
-        public SecurityService(IRepository<User> userRepository)
+        public UserDomain(IRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }
-        public async Task RegisterSecurityUser(User securityUser)
+        public async Task RegisterSecurityUser(User user)
         {
-            await _userRepository.InsertOneAsync(securityUser);
+            await _userRepository.InsertOneAsync(user);
         }
     }
 }

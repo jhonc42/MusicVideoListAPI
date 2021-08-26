@@ -18,13 +18,17 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Repositories
     {
         protected readonly IMongoContext Context;
         private readonly IMongoCollection<TDocument> _collection;
-        public MongoRepository(IMongoContext context)
+        // public MongoRepository(IMongoContext context)
+        public MongoRepository(IMongoSettings settings)
         {
-            Context = context;
+            // Context = context;
+            var database = new MongoClient(settings.ConnectionString).GetDatabase(settings.DataBase);
+            _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
+
             // var db = new MongoClient(options.ConnectionString).GetDatabase(options.DataBase);
-            _collection = Context.GetCollection<TDocument>(typeof(TDocument).Name);
+            // _collection = Context.GetCollection<TDocument>(typeof(TDocument).Name);
         }
-        private protected string GetCollectionName(Type documentType)
+        private static protected string GetCollectionName(Type documentType)
         {
             return ((BsonCollectionAttribute)documentType.GetCustomAttributes(typeof(BsonCollectionAttribute), true).FirstOrDefault())?.CollectionName;
         }
@@ -80,39 +84,40 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Repositories
             // probar asi a ver que pasa y si lo necesita async colocarlo en los demás metodos:
             // Context.AddCommand(async () => await _collection.InsertOneAsync(document));
 
-            Context.AddCommand(() => _collection.InsertOneAsync(document));
+            _collection.InsertOneAsync(document);
+            // Context.AddCommand(() => _collection.InsertOneAsync(document));
             // _collection.InsertOne(document);
         }
 
-        //public virtual void InsertOneAsync(TDocument document)
-        //{
-        //    _context.AddCommand(async () => await _collection.InsertOneAsync(document));
-        //}
+        public virtual Task InsertOneAsync(TDocument document)
+        {
+            return Task.Run(() => _collection.InsertOneAsync(document));
+        }
 
         public void InsertMany(ICollection<TDocument> documents)
         {
-            // _collection.InsertMany(documents);
-            Context.AddCommand(() => _collection.InsertManyAsync(documents));
+            _collection.InsertMany(documents);
+            // Context.AddCommand(() => _collection.InsertManyAsync(documents));
         }
 
 
-        //public virtual async Task InsertManyAsync(ICollection<TDocument> documents)
-        //{
-        //    await _collection.InsertManyAsync(documents);
-        //}
+        public virtual async Task InsertManyAsync(ICollection<TDocument> documents)
+        {
+            await _collection.InsertManyAsync(documents);
+        }
 
         public void ReplaceOne(TDocument document)
         {
-            //var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
-            //_collection.FindOneAndReplace(filter, document);
-            Context.AddCommand(() => _collection.ReplaceOneAsync(Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id), document));
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            _collection.FindOneAndReplace(filter, document);
+            // Context.AddCommand(() => _collection.ReplaceOneAsync(Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id), document));
         }
 
-        //public virtual async Task ReplaceOneAsync(TDocument document)
-        //{
-        //    var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
-        //    await _collection.FindOneAndReplaceAsync(filter, document);
-        //}
+        public virtual async Task ReplaceOneAsync(TDocument document)
+        {
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
+            await _collection.FindOneAndReplaceAsync(filter, document);
+        }
 
         public void DeleteOne(Expression<Func<TDocument, bool>> filterExpression)
         {
@@ -120,38 +125,38 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Repositories
             Context.AddCommand(() => _collection.DeleteOneAsync(filterExpression));
         }
 
-        //public Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression)
-        //{
-        //    return Task.Run(() => _collection.FindOneAndDeleteAsync(filterExpression));
-        //}
+        public Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression)
+        {
+            return Task.Run(() => _collection.FindOneAndDeleteAsync(filterExpression));
+        }
 
         public void DeleteById(string id)
         {
             // var objectId = new ObjectId(id);
-            //var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
-            //_collection.FindOneAndDelete(filter);
-            Context.AddCommand(() => _collection.DeleteOneAsync(Builders<TDocument>.Filter.Eq(doc => doc.Id, id)));
+            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
+            _collection.FindOneAndDelete(filter);
+            // Context.AddCommand(() => _collection.DeleteOneAsync(Builders<TDocument>.Filter.Eq(doc => doc.Id, id)));
         }
 
-        //public Task DeleteByIdAsync(string id)
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        // var objectId = new ObjectId(id);
-        //        var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
-        //        _collection.FindOneAndDeleteAsync(filter);
-        //    });
-        //}
+        public Task DeleteByIdAsync(string id)
+        {
+            return Task.Run(() =>
+            {
+                // var objectId = new ObjectId(id);
+                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, id);
+                _collection.FindOneAndDeleteAsync(filter);
+            });
+        }
 
         public void DeleteMany(Expression<Func<TDocument, bool>> filterExpression)
         {
             Context.AddCommand(async () => await _collection.DeleteManyAsync(filterExpression));
         }
 
-        //public Task DeleteManyAsync(Expression<Func<TDocument, bool>> filterExpression)
-        //{
-        //    return Task.Run(() => _collection.DeleteManyAsync(filterExpression));
-        //}
+        public Task DeleteManyAsync(Expression<Func<TDocument, bool>> filterExpression)
+        {
+            return Task.Run(() => _collection.DeleteManyAsync(filterExpression));
+        }
 
         public void Dispose()
         {

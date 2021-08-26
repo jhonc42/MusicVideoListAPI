@@ -13,12 +13,12 @@ namespace JAC.MusicVideoList.Domain.Core.Core
     public class LoginDomain : ILoginDomain
     {
         private readonly IRepository<User> _userRepository;
-        private readonly IUnitOfWork _uow;
+        // private readonly IUnitOfWork _uow;
 
-        public LoginDomain(IRepository<User> userRepository, IUnitOfWork uow)
+        // public LoginDomain(IRepository<User> userRepository, IUnitOfWork uow)
+        public LoginDomain(IRepository<User> userRepository)
         {
             _userRepository = userRepository;
-            _uow = uow;
         }
         public async Task<User> GetLoginByCredentials(UserLogin userLogin)
         {

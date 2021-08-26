@@ -2,20 +2,10 @@
 using JAC.MusicVideoList.Application.Main.Interfaces;
 using JAC.MusicVideoList.Application.Main.Main;
 using JAC.MusicVideoList.Domain.Core.Core;
-using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
-using JAC.MusicVideoList.Domain.Core.Interfaces.Repository;
-using JAC.MusicVideoList.Infrastructure.Main.Data.ContextMongoDB;
-using JAC.MusicVideoList.Infrastructure.Main.Repositories;
+using JAC.MusicVideoList.Infrastructure.Main.Mapper;
 using JAC.MusicVideoList.Infrastructure.Main.Services;
-using JAC.MusicVideoList.Transversal.Common.Mapper;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Infrastructure.Main
 {
@@ -31,11 +21,13 @@ namespace JAC.MusicVideoList.Infrastructure.Main
         {
             services.AddTransient<IPasswordService, PasswordService>();
             services.AddScoped<ILoginDomain, LoginDomain>();
+            services.AddScoped<IUserDomain, UserDomain>();
             services.AddScoped<ILoginApplication, LoginApplication>();
+            services.AddScoped<IUserApplication, UserApplication>();
             services.AddTransient<ISecurityService, SecurityService>();
 
-            services.AddScoped<IMongoContext, MongoContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // services.AddScoped<IMongoContext, MongoContext>();
+            // services.AddScoped<IUnitOfWork, UnitOfWork>();
             // services.AddTransient<IUserContext, UserContext>();
             //services.AddTransient<IUserRepository, UserRepository>();
 

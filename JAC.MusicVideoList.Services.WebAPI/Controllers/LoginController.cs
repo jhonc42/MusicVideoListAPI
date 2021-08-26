@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace JAC.MusicVideoList.Services.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Domain.Core.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        Task<bool> Commit();
-    }
+    //public interface IUnitOfWork : IDisposable
+    //{
+    //    Task<bool> Commit();
+    //}
 }
