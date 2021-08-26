@@ -18,8 +18,4 @@
     <ProjectReference Include="..\JAC.MusicVideoList.Transversal.Common\JAC.MusicVideoList.Transversal.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Interfaces\" />
-  </ItemGroup>
-
 </Project>

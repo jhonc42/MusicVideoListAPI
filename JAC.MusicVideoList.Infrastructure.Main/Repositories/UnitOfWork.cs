@@ -10,28 +10,23 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly UserContext _context;
-        private readonly IUserRepository _userRepository;
+        private readonly IMongoContext _context;
 
-        public UnitOfWork(UserContext context)
+        public UnitOfWork(IMongoContext context)
         {
             _context = context;
         }
-        public IUserRepository UserRepository => throw new NotImplementedException();
+
+        public async Task<bool> Commit()
+        {
+            var changeAmount = await _context.SaveChanges();
+
+            return changeAmount > 0;
+        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
+            _context.Dispose();
         }
     }
 }

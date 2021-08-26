@@ -34,11 +34,12 @@ namespace JAC.MusicVideoList.Infrastructure.Main
             services.AddScoped<ILoginApplication, LoginApplication>();
             services.AddTransient<ISecurityService, SecurityService>();
 
-            services.AddTransient<IUserContext, UserContext>();
+            services.AddScoped<IMongoContext, MongoContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // services.AddTransient<IUserContext, UserContext>();
+            //services.AddTransient<IUserRepository, UserRepository>();
 
-            services.AddTransient<IUserRepository, UserRepository>();
 
-            
 
             return services;
         }

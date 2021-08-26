@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Domain.Core.Interfaces.Repository
 {
-    public interface IMongoRepository<TDocument> where TDocument : IDocument
+    public interface IRepository<TDocument> : IDisposable where TDocument : IDocument
     {
         //Task<IEnumerable<TDocument>> GetAll();
         //Task<TDocument> GetById(string id);
@@ -33,26 +33,26 @@ namespace JAC.MusicVideoList.Domain.Core.Interfaces.Repository
 
         void InsertOne(TDocument document);
 
-        Task InsertOneAsync(TDocument document);
+        // Task InsertOneAsync(TDocument document);
 
         void InsertMany(ICollection<TDocument> documents);
 
-        Task InsertManyAsync(ICollection<TDocument> documents);
+        // Task InsertManyAsync(ICollection<TDocument> documents);
 
         void ReplaceOne(TDocument document);
 
-        Task ReplaceOneAsync(TDocument document);
+        // Task ReplaceOneAsync(TDocument document);
 
         void DeleteOne(Expression<Func<TDocument, bool>> filterExpression);
 
-        Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression);
+        // Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression);
 
         void DeleteById(string id);
 
-        Task DeleteByIdAsync(string id);
+        // Task DeleteByIdAsync(string id);
 
         void DeleteMany(Expression<Func<TDocument, bool>> filterExpression);
 
-        Task DeleteManyAsync(Expression<Func<TDocument, bool>> filterExpression);
+        // Task DeleteManyAsync(Expression<Func<TDocument, bool>> filterExpression);
     }
 }

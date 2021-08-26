@@ -12,15 +12,18 @@ namespace JAC.MusicVideoList.Infrastructure.Main.Services
     public class SecurityService : ISecurityService
     {
         // private readonly IUserRepository _userRepository;
-        private readonly IMongoRepository<User> _userRepository;
+        private readonly IRepository<User> _userRepository;
+        private readonly IUnitOfWork _uow;
 
-        public SecurityService(IMongoRepository<User> userRepository)
+        public SecurityService(IRepository<User> userRepository, IUnitOfWork uow)
         {
             _userRepository = userRepository;
+            _uow = uow;
         }
         public async Task RegisterSecurityUser(User securityUser)
         {
-            await _userRepository.InsertOneAsync(securityUser);
+            _userRepository.InsertOne(securityUser);
+            await _uow.Commit();
 
         }
     }

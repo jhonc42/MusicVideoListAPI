@@ -12,22 +12,22 @@ using System.Threading.Tasks;
 namespace JAC.MusicVideoList.Infrastructure.Main.Repositories
 {
     //class UserRepository : MongoRepository<User>, IUserRepository
-    class UserRepository : IUserRepository
-    {
-        private readonly IUserContext _userContext;
-        public UserRepository(IUserContext userContext)
-        {
-            _userContext = userContext;
-        }
+    //class UserRepository : IUserRepository
+    //{
+    //    private readonly IUserContext _userContext;
+    //    public UserRepository(IUserContext userContext)
+    //    {
+    //        _userContext = userContext;
+    //    }
 
-        public async Task<User> GetUserByUserName(UserLogin user)
-        {
-            return await _userContext.Users.Find(x => x.UserName == user.UserName).FirstOrDefaultAsync();
-        }
+    //    public async Task<User> GetUserByUserName(UserLogin user)
+    //    {
+    //        return await _userContext.Users.Find(x => x.UserName == user.UserName).FirstOrDefaultAsync();
+    //    }
 
-        public async Task RegisterUser(User newUser)
-        {
-            await _userContext.Users.InsertOneAsync(newUser);
-        }
-    }
+    //    public async Task RegisterUser(User newUser)
+    //    {
+    //        await _userContext.Users.InsertOneAsync(newUser);
+    //    }
+    //}
 }

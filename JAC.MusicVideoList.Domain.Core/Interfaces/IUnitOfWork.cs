@@ -8,12 +8,6 @@ namespace JAC.MusicVideoList.Domain.Core.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IUserRepository UserRepository { get; }
-
-        // IRepository<User> UserRepository { get; }
-
-        void SaveChanges();
-
-        Task SaveChangesAsync();
+        Task<bool> Commit();
     }
 }

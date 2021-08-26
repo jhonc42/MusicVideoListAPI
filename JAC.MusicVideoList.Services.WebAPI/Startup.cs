@@ -44,7 +44,7 @@ namespace JAC.MusicVideoList.Services.WebAPI
 
             services.Configure<PasswordOptions>(options => Configuration.GetSection("PasswordOptions").Bind(options));
             services.AddMapper();
-            services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(MongoRepository<>));
             services.AddServices();
             services.AddControllers();
             services.AddSwaggerGen(c =>

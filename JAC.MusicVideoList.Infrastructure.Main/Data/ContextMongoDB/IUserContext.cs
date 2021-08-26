@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Infrastructure.Main.Data.ContextMongoDB
 {
-    public interface IUserContext
-    {
-        IMongoCollection<User> Users {get;}
-    }
+    //public interface IUserContext
+    //{
+    //    IMongoCollection<User> Users {get;}
+    //}
 }
