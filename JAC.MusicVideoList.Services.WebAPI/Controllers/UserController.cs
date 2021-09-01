@@ -2,6 +2,7 @@
 using JAC.MusicVideoList.Application.Main.DTOs;
 using JAC.MusicVideoList.Application.Main.Interfaces;
 using JAC.MusicVideoList.Domain.Core.Entities;
+using JAC.MusicVideoList.Domain.Core.Enums;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize(Roles = nameof(RoleType.Administrator))]
     public class UserController : ControllerBase
     {
         private readonly IUserApplication _userApplication;
