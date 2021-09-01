@@ -50,10 +50,6 @@ namespace JAC.MusicVideoList.Services.WebAPI
             services.AddScoped(typeof(IRepository<>), typeof(MongoRepository<>));
             services.AddServices();
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAC.MusicVideoList.Services.WebAPI", Version = "v1" });
-            });
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -72,6 +68,10 @@ namespace JAC.MusicVideoList.Services.WebAPI
                 };
 
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAC.MusicVideoList.Services.WebAPI", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,7 +88,7 @@ namespace JAC.MusicVideoList.Services.WebAPI
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            // app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

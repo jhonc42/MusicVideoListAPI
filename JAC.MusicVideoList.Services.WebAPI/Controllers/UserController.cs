@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Services.WebAPI.Controllers
 {
-    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserApplication _userApplication;
@@ -23,6 +23,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
         }
 
         [HttpPost]
+        // [Authorize]
         public async Task<IActionResult> Post(UserDTO userDTO)
         {
 
