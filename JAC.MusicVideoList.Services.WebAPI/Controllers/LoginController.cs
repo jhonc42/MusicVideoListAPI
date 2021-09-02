@@ -29,19 +29,16 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
         public async Task<IActionResult> Authentication(UserLogin login)
         {
             //if it is a valid user
-            var validation = await IsValidUser(login);
-            if (validation.Item1)
+            var response = await _loginApplication.GetLoginByCredentials(login);
+            if (!response.IsSuccess)
             {
-                var token = GenerateToken(validation.Item2);
-                return Ok(new { token });
+                return NotFound(response);
             }
-
-            return NotFound();
+            response.Data.Token = GenerateToken(response.Data);
+            return Ok(response);
         }
 
-        private async Task<(bool, UserDTO)> IsValidUser(UserLogin login) => await _loginApplication.GetLoginByCredentials(login);
-
-        private string GenerateToken(UserDTO user)
+        private string GenerateToken(UserTokenDTO user)
         {
             //Header
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Authentication:SecretKey"]));
@@ -70,5 +67,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
     }
 }

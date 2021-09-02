@@ -41,7 +41,7 @@ namespace JAC.MusicVideoList.Application.Test
 
             var result = await context.GetLoginByCredentials(user);
 
-            Assert.AreEqual(expected, result.Item1);
+            Assert.AreEqual(expected, result.IsSuccess);
 
         }
 
@@ -52,11 +52,11 @@ namespace JAC.MusicVideoList.Application.Test
             var context = scope.ServiceProvider.GetService<ILoginApplication>();
             var expected = true;
 
-            var user = new UserLogin { UserName = "jhon123", Password = "123456" };
+            var user = new UserLogin { UserName = "admin123", Password = "123456" };
 
             var result = await context.GetLoginByCredentials(user);
 
-            Assert.AreEqual(expected, result.Item1);
+            Assert.AreEqual(expected, result.IsSuccess);
 
         }
     }

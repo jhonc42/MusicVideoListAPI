@@ -24,22 +24,16 @@ namespace JAC.MusicVideoList.Application.Main.Main
         public async Task<Response<UserTokenDTO>> CreateUser(UserDTO userDTO)
         {
             //TODO mirar manejo de filtros de excepciones
-            var response = new Response<UserTokenDTO>();
             try
             {
                 var user = _mapper.Map<User>(userDTO);
                 await _userDomain.RegisterSecurityUser(user);
-                //TODO mejorar esto con lo de abajo
-                return new Response<UserTokenDTO> { IsSuccess = true, Data = _mapper.Map<UserTokenDTO>(user), Message = "OK" };
+                return Response<UserTokenDTO>.CreateSuccessful(_mapper.Map<UserTokenDTO>(user));
             }
             catch (Exception ex)
             {
-                //TODO mejorar esto con lo de arriba
-                response.Message = ex.Message;
-                response.IsSuccess = false;
+                return Response<UserTokenDTO>.CreateUnsuccessful(ex.Message, null);
             }
-            return response;
-
 
         }
     }
