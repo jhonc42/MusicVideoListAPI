@@ -48,7 +48,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
             //Claims
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim("User", user.Name),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
             };

@@ -1,6 +1,8 @@
+using FluentValidation.AspNetCore;
 using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Interfaces.Repository;
 using JAC.MusicVideoList.Infrastructure.Main;
+using JAC.MusicVideoList.Infrastructure.Main.Filters;
 using JAC.MusicVideoList.Infrastructure.Main.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -71,6 +73,14 @@ namespace JAC.MusicVideoList.Services.WebAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAC.MusicVideoList.Services.WebAPI", Version = "v1" });
+            });
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<ValidationFilter>();
+            }).AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
             });
         }
 

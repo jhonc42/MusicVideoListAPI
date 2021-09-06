@@ -37,7 +37,7 @@ namespace JAC.MusicVideoList.Application.Test
             var context = scope.ServiceProvider.GetService<ILoginApplication>();
             var expected = false;
 
-            var user = new UserLogin { UserName = "asdf", Password = "asdfgsadg" };
+            var user = new UserLogin { Email = "asdf", Password = "asdfgsadg" };
 
             var result = await context.GetLoginByCredentials(user);
 
@@ -52,7 +52,7 @@ namespace JAC.MusicVideoList.Application.Test
             var context = scope.ServiceProvider.GetService<ILoginApplication>();
             var expected = true;
 
-            var user = new UserLogin { UserName = "admin123", Password = "123456" };
+            var user = new UserLogin { Email = "admin@test.com", Password = "123456" };
 
             var result = await context.GetLoginByCredentials(user);
 

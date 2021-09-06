@@ -20,7 +20,7 @@ namespace JAC.MusicVideoList.Domain.Core.Entities
         // [BsonElement("User")]
         public string Name { get; set; }
 
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         public string Password { get; set; }
 

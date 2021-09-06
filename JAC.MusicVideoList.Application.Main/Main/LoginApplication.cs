@@ -33,7 +33,6 @@ namespace JAC.MusicVideoList.Application.Main.Main
                     return Response<UserTokenDTO>.CreateUnsuccessful("Data Login Incorrect", null);
 
                 var isValid = _passwordService.Check(user.Password, userLogin.Password);
-
                 if (isValid)
                     return Response<UserTokenDTO>.CreateSuccessful(userToken);
 

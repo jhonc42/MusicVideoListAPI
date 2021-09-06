@@ -23,7 +23,7 @@ namespace JAC.MusicVideoList.Domain.Core.Core
         public async Task<User> GetLoginByCredentials(UserLogin userLogin)
         {
             return await _userRepository.FindOneAsync(
-                filter => filter.UserName == userLogin.UserName
+                filter => filter.Email == userLogin.Email
                 // x => x.UserName == userLogin.UserName
             );
             // return await _userRepository.GetUserByUserName(userLogin);
