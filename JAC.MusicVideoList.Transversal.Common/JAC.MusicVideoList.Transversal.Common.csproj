@@ -8,4 +8,10 @@
     <PackageReference Include="FluentValidation" Version="10.3.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Consts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Consts\" />
+  </ItemGroup>
 </Project>

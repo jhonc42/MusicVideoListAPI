@@ -1,11 +1,13 @@
 ﻿using JAC.MusicVideoList.Application.Main.DTOs;
 using JAC.MusicVideoList.Application.Main.Interfaces;
 using JAC.MusicVideoList.Domain.Core.Entities;
+using JAC.MusicVideoList.Transversal.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -26,6 +29,8 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(Response<UserTokenDTO>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Authentication(UserLogin login)
         {
             //if it is a valid user

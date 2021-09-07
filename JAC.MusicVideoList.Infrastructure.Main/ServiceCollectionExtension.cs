@@ -3,6 +3,7 @@ using JAC.MusicVideoList.Application.Main.Interfaces;
 using JAC.MusicVideoList.Application.Main.Main;
 using JAC.MusicVideoList.Domain.Core.Core;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
+using JAC.MusicVideoList.Infrastructure.Main.External;
 using JAC.MusicVideoList.Infrastructure.Main.Mapper;
 using JAC.MusicVideoList.Infrastructure.Main.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,9 @@ namespace JAC.MusicVideoList.Infrastructure.Main
             services.AddScoped<ILoginApplication, LoginApplication>();
             services.AddScoped<IUserApplication, UserApplication>();
             services.AddTransient<ISecurityService, SecurityService>();
+            services.AddScoped<ISearchApplication, SearchApplication>();
+            services.AddScoped<ISearchDomain, SearchDomain>();
+            services.AddScoped<IExternalServices, ExternalServices>();
 
             // services.AddScoped<IMongoContext, MongoContext>();
             // services.AddScoped<IUnitOfWork, UnitOfWork>();

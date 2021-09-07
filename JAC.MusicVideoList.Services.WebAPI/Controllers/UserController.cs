@@ -4,8 +4,11 @@ using JAC.MusicVideoList.Application.Main.Interfaces;
 using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Enums;
 using JAC.MusicVideoList.Domain.Core.Interfaces;
+using JAC.MusicVideoList.Transversal.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace JAC.MusicVideoList.Services.WebAPI.Controllers
@@ -13,6 +16,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Roles = nameof(RoleType.Administrator))]
+    [Produces("application/json")]
     public class UserController : ControllerBase
     {
         private readonly IUserApplication _userApplication;
@@ -24,6 +28,8 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(Response<IEnumerable<UserTokenDTO>>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         // [Authorize]
         public async Task<IActionResult> Post(UserDTO userDTO)
         {
