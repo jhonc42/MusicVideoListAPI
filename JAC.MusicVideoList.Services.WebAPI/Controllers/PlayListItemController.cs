@@ -3,13 +3,15 @@ using System.Threading.Tasks;
 using JAC.MusicVideoList.Application.Main.Interfaces;
 using JAC.MusicVideoList.Domain.Core.Entities;
 using JAC.MusicVideoList.Domain.Core.Entities.Repository;
+using JAC.MusicVideoList.Domain.Core.Enums;
 using JAC.MusicVideoList.Transversal.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JAC.MusicVideoList.Services.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    // [Authorize()]
+    [Authorize()]
     [Produces("application/json")]
     [ApiController]
     public class PlayListItemController : ControllerBase
@@ -36,6 +38,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
         [HttpPost, Route("InsertPlayList")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(Response<PlayList>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [Authorize(Roles = nameof(RoleType.Administrator))]
         public async Task<IActionResult> InsertPlayList([FromBody] PlayList playList)
         {
             var response = await _PlayListItemApplication.AddPlayList(playList);
@@ -66,6 +69,7 @@ namespace JAC.MusicVideoList.Services.WebAPI.Controllers
         [HttpDelete, Route("DeleteItemPlayList/{listId}/{itemId}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(Response<bool>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [Authorize(Roles = nameof(RoleType.Administrator))]
         public async Task<IActionResult> DeleteItemPlayList(string listId, string itemId)
         {
             var response = await _PlayListItemApplication.DeleteItemFromPlayList(listId, itemId);

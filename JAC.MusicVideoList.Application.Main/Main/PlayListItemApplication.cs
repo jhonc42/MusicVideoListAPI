@@ -77,6 +77,9 @@ namespace JAC.MusicVideoList.Application.Main.Main
             try
             {
                 var result = await _PlayListItemDomain.GetPlayListById(id);
+                if (result == null)
+                    return Response<PlayList>.CreateUnsuccessful("List not found", null);
+
                 return Response<PlayList>.CreateSuccessful(result);
             }
             catch (Exception ex)
