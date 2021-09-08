@@ -22,5 +22,8 @@
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <None Remove="FluentValidation.AspNetCore" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Google.Apis.Auth" />
+    <None Remove="Google.Apis" />
+    <None Remove="Google.Apis.YouTube.v3" />
   </ItemGroup>
 </Project>

@@ -49,6 +49,15 @@ namespace JAC.MusicVideoList.Services.WebAPI
 
             services.Configure<PasswordOptions>(options => Configuration.GetSection("PasswordOptions").Bind(options));
             services.AddMapper();
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("Default_CorsPolicy", o =>
+                {
+                    o.AllowAnyHeader();
+                    o.AllowAnyMethod();
+                    o.AllowAnyOrigin();
+                });
+            });
             services.AddScoped(typeof(IRepository<>), typeof(MongoRepository<>));
             services.AddServices();
             services.AddControllers();
@@ -90,10 +99,20 @@ namespace JAC.MusicVideoList.Services.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAC.MusicVideoList.Services.WebAPI v1"));
             }
+            // string appNameURI = Configuration.GetValue<string>("AppNameURI")?.Trim() ?? "/";
+            // appNameURI = (!appNameURI.StartsWith("/") ? ("/" + appNameURI) : appNameURI);
+            // appNameURI = (!appNameURI.EndsWith("/") ? (appNameURI + "/") : appNameURI);
 
+            // string swaggerEndPoint = $"{appNameURI}swagger/v1/swagger.json";
+            app.UseCors("Default_CorsPolicy");
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAC.MusicVideoList.Services.WebAPI v1"));
+            // app.UseSwaggerUI(s =>
+            //{
+            //    s.RoutePrefix = "api";
+            //    s.SwaggerEndpoint(swaggerEndPoint, "JAC.MusicVideoList.Services.WebAPI v1");
+            //});
             app.UseHttpsRedirection();
 
             app.UseRouting();

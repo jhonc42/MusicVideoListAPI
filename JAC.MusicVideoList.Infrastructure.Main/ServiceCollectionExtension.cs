@@ -29,6 +29,8 @@ namespace JAC.MusicVideoList.Infrastructure.Main
             services.AddScoped<ISearchApplication, SearchApplication>();
             services.AddScoped<ISearchDomain, SearchDomain>();
             services.AddScoped<IExternalServices, ExternalServices>();
+            services.AddScoped<IPlayListItemApplication, PlayListItemApplication>();
+            services.AddScoped<IPlayListItemDomain, PlayListItemDomain>();
 
             // services.AddScoped<IMongoContext, MongoContext>();
             // services.AddScoped<IUnitOfWork, UnitOfWork>();
