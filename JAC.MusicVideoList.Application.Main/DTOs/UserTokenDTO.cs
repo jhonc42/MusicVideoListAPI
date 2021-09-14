@@ -9,6 +9,8 @@ namespace JAC.MusicVideoList.Application.Main.DTOs
 {
     public class UserTokenDTO
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public string Email { get; set; }
