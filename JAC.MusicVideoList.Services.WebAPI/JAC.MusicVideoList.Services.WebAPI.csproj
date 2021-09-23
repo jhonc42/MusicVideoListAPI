@@ -26,4 +26,10 @@
     <None Remove="Google.Apis" />
     <None Remove="Google.Apis.YouTube.v3" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
 </Project>
